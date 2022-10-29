@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+{% load static %}
+
+<!-- 载入静态文件 -->
+
+<html lang="zh-cn">
+<link rel="icon" href="/media/webimage/icon.png">
+<head>
+    <meta charset="UTF-8">
+<!--   网页标题     -->
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+
+<!--    引入bootstrap 的css文件-->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+<!--    引入代码高亮  -->
+    <link rel="stylesheet" href="{% static 'md_css/monokai.css' %}">
+
+<!--    利用cdn导入方式导入bootstrap 的css文件-->
+<!--    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">-->
+</head>
+
+<body>
+<!-- bootstrap.js 依赖 jQuery.js 导入jQuery.js -->
+<!--    <script src="{% static 'jquery/jquery-3.6.0.js'%}"></script>-->
+<!--    利用cdn导入jQuery.js-->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<!--    用cdn导入layer-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/layer/3.5.1/layer.js"></script>
+    <!--
+    Popper.js 采用 cdn 远程引入
+    对于cdn引用只是项目引入的一种方式，在实际开发中会用到
+    还可以放到本地资源中，两种方式都可、对于网速比较慢的用户，本地加载较快
+    如果网速比较快，就可以选择cdn引入
+    -->
+<!--    利用cdn导入popper文件-->
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+<!--    从static文件中导入bootstrap.js-->
+<!--    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>-->
+<!--    用cdn导入 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!--引入导航栏-->
+    {% include 'article/header.html' %}
+<!--预留页面内容-->
+    {% block content %}
+    {% endblock content %}
+<!--引入注脚-->
+    {% include 'article/footer.html' %}
+
+</body>
+</html>

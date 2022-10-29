@@ -1,0 +1,60 @@
+
+<!--定义导航栏-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+<!--        导航栏商标-->
+        <a class="navbar-brand" href="{% url 'article:article_list' %}">SESAME算法</a>
+<!--        导航栏入口-->
+        <div>
+            <ul class="navbar-nav">
+<!--                条目-->
+                <li>
+                    <a class="nav-link" href="{% url 'article:article_list' %}">文章</a>
+                </li>
+<!--                django 的if 模板语句 -->
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ user.username }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'article:article_create' %}">添加文章</a>
+                            <a class="dropdown-item" href="#" onclick="user_delete()">删除账户</a>
+                            <a class="dropdown-item" href="{% url 'user:logout' %}">退出</a>
+                            <a class="dropdown-item" href="{% url 'user:edit' user.id %}">修改信息</a>
+                        </div>
+                    </li>
+<!--                如果用户未登录则显示登录-->
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user:login' %}">登录</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% if user.is_authenticated %}
+<form
+    style="display:none;"
+    id="user_delete"
+    action="{% url 'user:delete' user.id %}"
+    method="POST"
+>
+{% csrf_token %}
+    <button type="submit">发送</button>
+</form>
+<script>
+    function user_delete() {
+        // 调用layer弹窗组件
+        layer.open({
+            title: "确认删除",
+            content: "确认删除用户资料吗？",
+            yes: function(index, layero) {
+                $('form#user_delete button').click();
+                layer.close(index);
+            },
+        })
+    }
+</script>
+{% endif %}
