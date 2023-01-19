@@ -26,19 +26,18 @@ def user_delete(request, id):
 
 # 用户注册
 def user_register(request):
-    # print(0)
+    #  (0)
     if request.method == "POST":
-        # print(1)
+        #  (1)
         user_register_form = UserRegisterForm(data=request.POST)
         if user_register_form.is_valid():
-            print(user_register_form.is_valid())
             new_user = user_register_form.save(commit=False)
             # 设置密码
             new_user.set_password(user_register_form.cleaned_data['password'])
             new_user.save()
             # 保存好数据后立即登录并返回博客列表
             login(request, new_user)
-            # print(2)
+            #  (2)
             return redirect("article:article_list")
         else:
             return HttpResponse("注册表单输入有误请重新输入~")
@@ -109,7 +108,7 @@ def profile_edit(request, id):
                 profile.avatar = profile_cd["avatar"]
             profile.save()
             # 带参数的 redirect
-            print(id)
+             
             return redirect('user:edit', id=id)
         else:
             return HttpResponse("输入有误请返回")

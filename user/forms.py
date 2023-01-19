@@ -20,10 +20,7 @@ class UserRegisterForm(forms.ModelForm):
     def clean_password2(self):
         data = self.cleaned_data
         # 测试密码一致性
-        print('password:' + data.get('password'))
-        print('password2:' + data.get('password2'))
         if data.get('password') == data.get('password2'):
-            print(1)
             return data.get('password')
         else:
             # print("密码不一致")

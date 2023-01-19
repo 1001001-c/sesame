@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&vq)2e-ej9()d5$^ivr#%m^uxt%p4&d%^hn5bzi=qt8uym!uil'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['175.24.187.80']
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 
 
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'my_log.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 

@@ -96,7 +96,7 @@ def article_list(request):
     if order == 'total_views':
         article_list = article_list.order_by('-total_views')
 
-    paginator = Paginator(article_list, 3)
+    paginator = Paginator(article_list, 10)
     page = request.GET.get('page')
     articles = paginator.get_page(page)
 
@@ -158,7 +158,6 @@ def article_update(request, id):
         # 将提交的表单存入数据库
         article_post_form = ArticlePostFrom(data=request.POST)
         # 判断提交的表单是否符合模型的要求
-        print(article_post_form.errors.as_data())
         if article_post_form.is_valid():
             if request.POST['column'] != 'none':
                 article.column = ArticleColumn.objects.get(id=request.POST['column'])
